@@ -1,0 +1,6 @@
+#!include:.gitignore
+.git
+.shots/
+scripts/
+README.md
+DEPLOY.md
