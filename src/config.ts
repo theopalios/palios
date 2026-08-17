@@ -23,10 +23,13 @@ export const BOOKING = {
   /**
    * Canonical appointment-schedule URL (the short link above resolves here).
    * Used to build the iframe embed. Set to '' to disable the embed and show
-   * the email fallback instead.
+   * the email fallback instead. (`PUBLIC_BOOKING_EMBED=off npm run build`
+   * also disables it, used by the test harness.)
    */
   embedUrl:
-    'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3QXetDtqN8JEchIBLgl6z3AmSoXFdgC0wKVN2k_2tiUhjI5A25d-vqpkg6rQkcXZ52whLIP3-a',
+    import.meta.env.PUBLIC_BOOKING_EMBED === 'off'
+      ? ''
+      : 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3QXetDtqN8JEchIBLgl6z3AmSoXFdgC0wKVN2k_2tiUhjI5A25d-vqpkg6rQkcXZ52whLIP3-a',
 };
 
 /** Pre-filled email for speaking inquiries (also the booking fallback). */

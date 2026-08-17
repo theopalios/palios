@@ -8,7 +8,10 @@ function fromVars(el: HTMLElement): gsap.TweenVars {
   switch (variant) {
     case 'slide': {
       const dir = Number(el.dataset.dir ?? '1');
-      return { x: 64 * dir, rotation: 1.5 * dir };
+      // keep the pre-reveal offset inside the viewport so it never creates
+      // horizontal scrollable overflow on small screens
+      const dist = Math.min(64, window.innerWidth * 0.045);
+      return { x: dist * dir, rotation: 1.5 * dir };
     }
     case 'toss':
       return { y: 64, rotation: gsap.utils.random(-4, 4) };

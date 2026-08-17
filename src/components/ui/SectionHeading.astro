@@ -4,12 +4,32 @@ interface Props {
   title: string;
   /** CSS color for the eyebrow marker, e.g. "var(--color-magenta)" */
   accent?: string;
+  /**
+   * Set false inside pinned sections: reveal triggers there compute against
+   * pre-pin positions and would fire at the wrong scroll offset.
+   */
+  reveal?: boolean;
 }
 
-const { eyebrow, title, accent = 'var(--color-tangerine)' } = Astro.props;
+const { eyebrow, title, accent = 'var(--color-tangerine)', reveal = true } = Astro.props;
 ---
 
-<div data-reveal-group>
-  <p class="eyebrow" style={`--accent: ${accent}`} data-reveal>{eyebrow}</p>
-  <h2 class="display h-section mt-5 max-w-4xl" data-reveal>{title}</h2>
-</div>
+{
+  reveal ? (
+    <div data-reveal-group>
+      <p class="eyebrow" style={`--accent: ${accent}`} data-reveal>
+        {eyebrow}
+      </p>
+      <h2 class="display h-section mt-5 max-w-4xl" data-reveal>
+        {title}
+      </h2>
+    </div>
+  ) : (
+    <div>
+      <p class="eyebrow" style={`--accent: ${accent}`}>
+        {eyebrow}
+      </p>
+      <h2 class="display h-section mt-5 max-w-4xl">{title}</h2>
+    </div>
+  )
+}

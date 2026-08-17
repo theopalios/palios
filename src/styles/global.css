@@ -37,6 +37,7 @@ html.motion [data-bg] {
 
 html {
   scroll-behavior: auto; /* Lenis owns smoothing; CSS smooth would fight it */
+  overflow-x: clip;
 }
 
 body {
