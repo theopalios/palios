@@ -1,0 +1,15 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** CSS color for the eyebrow marker, e.g. "var(--color-magenta)" */
+  accent?: string;
+}
+
+const { eyebrow, title, accent = 'var(--color-tangerine)' } = Astro.props;
+---
+
+<div data-reveal-group>
+  <p class="eyebrow" style={`--accent: ${accent}`} data-reveal>{eyebrow}</p>
+  <h2 class="display h-section mt-5 max-w-4xl" data-reveal>{title}</h2>
+</div>

@@ -1,0 +1,66 @@
+---
+/** Decorative color-block shapes. Color comes from a text-* class on `class`. */
+interface Props {
+  shape?: 'blob' | 'sparkle' | 'ring' | 'half' | 'squiggle';
+  class?: string;
+}
+
+const { shape = 'blob', class: className = 'w-full h-auto' } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+  {
+    shape === 'blob' && (
+      <path
+        stroke="var(--color-ink)"
+        stroke-width="3"
+        vector-effect="non-scaling-stroke"
+        d="M50 5c13 0 26 6 33 17 7 10 8 25 3 37S69 82 57 87 30 91 20 83 6 61 8 47 15 22 26 13 41 5 50 5Z"
+      />
+    )
+  }
+  {
+    shape === 'sparkle' && (
+      <path
+        stroke="var(--color-ink)"
+        stroke-width="3"
+        vector-effect="non-scaling-stroke"
+        d="M50 2c4 33 15 44 48 48-33 4-44 15-48 48-4-33-15-44-48-48 33-4 44-15 48-48Z"
+      />
+    )
+  }
+  {
+    shape === 'ring' && (
+      <circle
+        cx="50"
+        cy="50"
+        r="38"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="16"
+        style="paint-order: stroke;"
+      />
+    )
+  }
+  {
+    shape === 'half' && (
+      <path
+        stroke="var(--color-ink)"
+        stroke-width="3"
+        vector-effect="non-scaling-stroke"
+        d="M4 96a46 46 0 0 1 92 0Z"
+      />
+    )
+  }
+  {
+    shape === 'squiggle' && (
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-width="7"
+        stroke-linecap="round"
+        d="M4 70c12-24 20-24 32 0s20 24 32 0 16-24 28-40"
+      />
+    )
+  }
+</svg>
