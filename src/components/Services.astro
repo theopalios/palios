@@ -1,0 +1,47 @@
+---
+import SectionHeading from './ui/SectionHeading.astro';
+import { services } from '../data/services';
+
+const indexColor = ['text-cobalt', 'text-tangerine'];
+const dotColor = ['bg-tangerine', 'bg-cobalt'];
+---
+
+<section
+  id="services"
+  data-bg="#c6f04d"
+  data-fg="#16141a"
+  style="background-color:#c6f04d;color:#16141a"
+  class="section-pad"
+>
+  <div class="wrap">
+    <SectionHeading eyebrow="What I do" title="Two ways to work with me." accent="var(--color-magenta)" />
+    <div class="mt-12 grid md:grid-cols-2 gap-8 md:gap-10">
+      {
+        services.map((s, i) => (
+          <article
+            class="block-card bg-paper text-ink p-8 md:p-10 flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1.5"
+            data-reveal="slide"
+            data-dir={i === 0 ? '-1' : '1'}
+          >
+            <span class={`display text-5xl ${indexColor[i % 2]}`} aria-hidden="true">
+              {s.index}
+            </span>
+            <h3 class="display text-3xl md:text-4xl">{s.title}</h3>
+            <p class="text-[1.05rem]">{s.audience}</p>
+            <ul class="space-y-2.5">
+              {s.points.map((p) => (
+                <li class="flex gap-3">
+                  <span class={`mt-2 size-2.5 shrink-0 rounded-full border-2 border-ink ${dotColor[i % 2]}`} aria-hidden="true" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            <a class="btn bg-ink text-paper mt-auto self-start" href={s.cta.href} data-magnetic>
+              {s.cta.label}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
