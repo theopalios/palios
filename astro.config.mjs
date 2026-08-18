@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: 'static',
-  // site: 'https://example.com', // TODO(theo): set your final domain, then canonical/OG URLs are emitted
+  site: 'https://palios.io',
   vite: {
     plugins: [tailwindcss()],
   },
