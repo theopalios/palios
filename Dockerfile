@@ -1,4 +1,6 @@
-FROM node:22-alpine AS build
+# glibc base: the lockfile's platform-specific optional deps (rollup/sharp)
+# resolve reliably here; musl/alpine trips npm's optional-dep lockfile bug
+FROM node:22-slim AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
