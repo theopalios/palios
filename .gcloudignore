@@ -1,6 +1,7 @@
 #!include:.gitignore
 .git
 .shots/
-scripts/
+# root-anchored: src/scripts/ must ship, only the test harness stays out
+/scripts/
 README.md
 DEPLOY.md
