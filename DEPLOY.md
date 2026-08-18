@@ -60,14 +60,39 @@ Cloud Build builds the `Dockerfile` remotely (`.gcloudignore` controls the uploa
 image, and Cloud Run serves it. The command prints your public
 `https://palios-site-<hash>-ez.a.run.app` URL when done.
 
-## Custom domain (optional, later)
+## Custom domain
+
+Done for **palios.io** (mapping exists; `site` is set in `astro.config.mjs`):
 
 ```bash
-gcloud beta run domain-mappings create --service palios-site --region europe-west4 --domain yourdomain.com
+gcloud beta run domain-mappings create --service palios-site --region europe-west4 --domain palios.io
 ```
 
-Add the DNS records it prints at your registrar, then set `site: 'https://yourdomain.com'` in
-`astro.config.mjs` and redeploy so canonical URLs are emitted.
+The mapping requires these records on the apex (`@`) at the palios.io registrar — TLS is
+auto-provisioned by Google once they resolve:
+
+| Type | Name | Value                 |
+| ---- | ---- | --------------------- |
+| A    | @    | 216.239.32.21         |
+| A    | @    | 216.239.34.21         |
+| A    | @    | 216.239.36.21         |
+| A    | @    | 216.239.38.21         |
+| AAAA | @    | 2001:4860:4802:32::15 |
+| AAAA | @    | 2001:4860:4802:34::15 |
+| AAAA | @    | 2001:4860:4802:36::15 |
+| AAAA | @    | 2001:4860:4802:38::15 |
+
+Check status with `gcloud beta run domain-mappings describe --domain palios.io --region europe-west4`.
+For `www.palios.io`, add a mapping for it too and a `CNAME www → ghs.googlehosted.com` record.
+
+## Project notes (as deployed)
+
+- Project `palios-site`, billing linked, APIs enabled; the default compute service account
+  carries `roles/cloudbuild.builds.builder` + `roles/logging.logWriter` (fresh projects need
+  both for `--source` deploys, and without the latter build failures are invisible).
+- The org enforces domain-restricted sharing; project `palios-site` has a scoped org-policy
+  override (`iam.allowedPolicyMemberDomains: allowAll`) so the site can be public (`allUsers`
+  has `roles/run.invoker`). Every other project keeps the org restriction.
 
 ## Notes
 
