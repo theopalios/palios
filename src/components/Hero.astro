@@ -1,0 +1,57 @@
+---
+import { SITE } from '../config';
+import Blob from './ui/Blob.astro';
+---
+
+<!-- TODO(theo): confirm the tagline wording and the NL ⇄ SG framing -->
+<section
+  id="top"
+  data-hero
+  data-bg="#faf6ee"
+  data-fg="#16141a"
+  style="background-color:#faf6ee;color:#16141a"
+  class="relative min-h-svh flex flex-col justify-center overflow-hidden"
+>
+  <div data-blob-wrap data-speed="1.4" class="absolute top-[13%] right-[6%] w-24 md:w-40 text-sunflower">
+    <div data-blob><Blob shape="sparkle" /></div>
+  </div>
+  <div data-blob-wrap data-speed="0.8" class="absolute bottom-[20%] right-[18%] w-20 md:w-36 text-magenta">
+    <div data-blob><Blob shape="blob" /></div>
+  </div>
+  <div data-blob-wrap data-speed="1.1" class="absolute top-[24%] left-[3%] w-16 md:w-28 text-cobalt">
+    <div data-blob><Blob shape="ring" /></div>
+  </div>
+  <div data-blob-wrap data-speed="0.6" class="absolute bottom-[9%] left-[10%] w-24 md:w-36 text-lime">
+    <div data-blob><Blob shape="half" /></div>
+  </div>
+  <div data-blob-wrap data-speed="1.8" class="absolute top-[55%] right-[7%] hidden md:block w-24 text-tangerine">
+    <div data-blob><Blob shape="squiggle" /></div>
+  </div>
+
+  <div class="wrap relative z-10 pt-28 pb-20" data-hero-content>
+    <p class="eyebrow" style="--accent: var(--color-magenta)" data-hero-eyebrow>
+      Advisor · Speaker · Founder — {SITE.location}
+    </p>
+    <h1 class="display h-hero mt-8">
+      <span class="hero-line"><span class="hero-line-inner">Theo Palios.</span></span>
+      <span class="hero-line">
+        <span class="hero-line-inner">I put <span class="text-cobalt" data-hero-accent>AI</span> to work</span>
+      </span>
+      <span class="hero-line"><span class="hero-line-inner">in healthcare.</span></span>
+    </h1>
+    <p class="mt-8 max-w-2xl text-lg md:text-xl" data-hero-sub>
+      Founder of <a href="https://unicornlabs.nl" class="font-bold underline decoration-[3px] decoration-lime underline-offset-4" target="_blank" rel="noopener">Unicorn Labs</a>, building <a href="https://noetika.ai" class="font-bold underline decoration-[3px] decoration-magenta underline-offset-4" target="_blank" rel="noopener">Noetika</a> — speech-based cognitive assessment for hospitals, memory clinics and pharma. I advise teams shipping AI into regulated care, and I get on stages to talk about what actually works.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a class="btn btn-lg bg-ink text-paper" href="#book" data-hero-cta data-magnetic>Book an advisory call</a>
+      <a class="btn btn-lg bg-paper text-ink" href="#book" data-hero-cta data-magnetic>Invite me to speak</a>
+    </div>
+  </div>
+
+  <p
+    class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold tracking-[0.2em] uppercase opacity-60"
+    data-hero-cta
+  >
+    Scroll ↓
+  </p>
+</section>

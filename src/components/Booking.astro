@@ -1,0 +1,85 @@
+---
+import SectionHeading from './ui/SectionHeading.astro';
+import { BOOKING, MAILTO, SITE } from '../config';
+
+/** Build the iframe src from the canonical appointment-schedule URL. */
+let embedSrc = '';
+if (BOOKING.embedUrl) {
+  const u = new URL(BOOKING.embedUrl);
+  u.searchParams.set('gv', 'true');
+  embedSrc = u.toString();
+}
+---
+
+<section
+  id="book"
+  data-bg="#ffc529"
+  data-fg="#16141a"
+  style="background-color:#ffc529;color:#16141a"
+  class="section-pad"
+>
+  <div class="wrap">
+    <SectionHeading eyebrow="Booking" title="Book time with me." accent="var(--color-cobalt)" />
+
+    <div class="mt-12 grid md:grid-cols-2 gap-8" data-reveal-group>
+      <div class="block-card bg-paper text-ink p-8 flex flex-col gap-4" data-reveal>
+        <h3 class="display text-2xl md:text-3xl">Advisory intro — 30 min</h3>
+        <p>
+          A focused first call: your product, your market, where AI fits, and whether I can help.
+          No deck required.
+        </p>
+        <p class="font-bold mt-auto">
+          {embedSrc ? 'Pick a slot in the calendar below ↓' : 'Email me to set it up →'}
+        </p>
+      </div>
+
+      <div class="block-card bg-ink text-paper on-ink p-8 flex flex-col gap-4" data-reveal>
+        <h3 class="display text-2xl md:text-3xl">Speaking inquiry</h3>
+        <p>
+          Keynotes, panels and workshops. Tell me about your event, audience and date — I reply
+          within 48 hours.
+        </p>
+        <a class="btn bg-tangerine text-paper mt-auto self-start" href={MAILTO.speaking} data-magnetic>
+          Send the details
+        </a>
+      </div>
+    </div>
+
+    {
+      embedSrc ? (
+        <div class="mt-10 block-card bg-white text-ink overflow-hidden" data-reveal>
+          <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-b-2 border-ink">
+            <p class="text-sm font-bold">Times show in your timezone · Google Calendar</p>
+            <a
+              class="text-sm font-bold underline underline-offset-4"
+              href={BOOKING.shareUrl}
+              target="_blank"
+              rel="noopener"
+            >
+              Open in a new tab ↗
+            </a>
+          </div>
+          <iframe
+            src={embedSrc}
+            title="Book an advisory call with Theo Palios"
+            loading="lazy"
+            class="w-full block bg-white"
+            style="height: 640px; border: 0;"
+          />
+        </div>
+      ) : (
+        <div class="mt-10 block-card bg-paper text-ink p-8 md:p-10" data-reveal>
+          <h3 class="display text-2xl">Booking opens soon.</h3>
+          <p class="mt-3 max-w-xl">Meanwhile, email me — I reply within 48 hours.</p>
+          <a class="btn btn-lg bg-ink text-paper mt-6" href={MAILTO.advisory} data-magnetic>
+            Email {SITE.email}
+          </a>
+        </div>
+      )
+    }
+
+    <p class="mt-8 font-medium" data-reveal>
+      Prefer email? Always works: <a class="font-bold underline underline-offset-4 decoration-2" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </p>
+  </div>
+</section>

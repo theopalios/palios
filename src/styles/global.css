@@ -1,0 +1,397 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/space-grotesk';
+
+@theme {
+  --color-paper: #faf6ee;
+  --color-ink: #16141a;
+  --color-cobalt: #2b3ff3;
+  --color-tangerine: #ff4d24;
+  --color-lime: #c6f04d;
+  --color-magenta: #f2409b;
+  --color-sunflower: #ffc529;
+  --color-violet: #7a5cff;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Black', 'Helvetica Neue', sans-serif;
+  --font-body: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Theme morph: --bg/--fg live on <html> and are tweened by GSAP as color-block
+   sections scroll into view. Sections declare their colors inline (the no-JS /
+   reduced-motion fallback shows them statically); when motion is on, sections
+   go transparent and the body paints them via the tweened vars.
+--------------------------------------------------------------------------- */
+html.motion [data-bg] {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+:root {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --accent: var(--color-cobalt);
+  --shadow-c: var(--color-ink);
+  --nav-h: 4.5rem;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis owns smoothing; CSS smooth would fight it */
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-tangerine);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 3px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lenis recommended base styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   Layout primitives
+--------------------------------------------------------------------------- */
+.wrap {
+  margin-inline: auto;
+  max-width: 72rem;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.section-pad {
+  padding-block: clamp(6rem, 12vw, 9rem);
+}
+
+/* Horizontal-strip padding that lines up with .wrap's content edge */
+.strip-pad {
+  padding-inline: calc((100vw - min(72rem, 100vw)) / 2 + clamp(1.25rem, 4vw, 3rem));
+}
+
+/* ---------------------------------------------------------------------------
+   Typography
+--------------------------------------------------------------------------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.h-hero {
+  font-size: clamp(2.75rem, 9vw, 8.25rem);
+}
+
+.h-section {
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+}
+
+.h-topic {
+  font-size: clamp(1.6rem, 4.5vw, 3.4rem);
+}
+
+.stat-num {
+  font-size: clamp(2.5rem, 6vw, 5.25rem);
+}
+
+.marquee-text {
+  font-size: clamp(4rem, 12vw, 10.5rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: '';
+  width: 2.25rem;
+  height: 0.875rem;
+  background: var(--accent);
+  border: 2px solid var(--fg);
+  border-radius: 999px;
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px var(--fg);
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Color-block signature: hard borders + offset shadows
+--------------------------------------------------------------------------- */
+.shadow-hard {
+  box-shadow: 6px 6px 0 0 var(--shadow-c);
+}
+.shadow-hard-sm {
+  box-shadow: 4px 4px 0 0 var(--shadow-c);
+}
+.on-ink {
+  --shadow-c: rgba(250, 246, 238, 0.92);
+}
+
+.block-card {
+  border: 2px solid var(--color-ink);
+  border-radius: 1.25rem;
+  box-shadow: 6px 6px 0 0 var(--shadow-c);
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons — transform is left to the magnetic effect (JS); hover grows shadow
+--------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.6rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.1;
+  box-shadow: 4px 4px 0 0 var(--shadow-c);
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover {
+  box-shadow: 7px 7px 0 0 var(--shadow-c);
+}
+.btn:active {
+  box-shadow: 2px 2px 0 0 var(--shadow-c);
+}
+.btn-lg {
+  padding: 1.1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   Nav
+--------------------------------------------------------------------------- */
+.site-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease,
+    border-color 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+.site-nav.nav-scrolled {
+  background-color: var(--bg);
+  border-bottom-color: var(--fg);
+}
+.site-nav.nav-hidden {
+  transform: translateY(-110%);
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding-block: 0.25rem;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+--------------------------------------------------------------------------- */
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em; /* keep descenders/ascenders inside the mask */
+  margin-block: -0.06em;
+}
+.hero-line-inner {
+  display: block;
+  will-change: transform;
+}
+.char {
+  display: inline-block;
+}
+
+/* ---------------------------------------------------------------------------
+   Marquee
+--------------------------------------------------------------------------- */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+.marquee-track {
+  display: inline-flex;
+  will-change: transform;
+}
+.marquee-half {
+  display: inline-block;
+  padding-right: 0.35em;
+}
+
+/* ---------------------------------------------------------------------------
+   Work — horizontal strip. Mobile: native snap scroll. Desktop + motion:
+   GSAP pins the section and translates the track.
+--------------------------------------------------------------------------- */
+[data-work-viewport] {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+[data-work-viewport]::-webkit-scrollbar {
+  display: none;
+}
+.work-track {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding-block: 1rem;
+}
+.work-card {
+  flex: 0 0 auto;
+  width: min(26rem, 84vw);
+  scroll-snap-align: center;
+}
+.work-progress {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@media (min-width: 768px) {
+  html.motion [data-work] {
+    overflow: clip;
+  }
+  html.motion [data-work-viewport] {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  html.motion .work-track {
+    will-change: transform;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Speaking topic rows — hover sweep
+--------------------------------------------------------------------------- */
+.topic-row {
+  position: relative;
+  isolation: isolate;
+  border-top: 2px solid var(--fg);
+  transition: color 0.3s ease;
+}
+.topic-row:last-of-type {
+  border-bottom: 2px solid var(--fg);
+}
+.topic-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--row-c, var(--color-paper));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.topic-row:hover::before,
+.topic-row:focus-within::before {
+  transform: scaleY(1);
+}
+.topic-row:hover,
+.topic-row:focus-within {
+  color: var(--color-ink);
+}
+.topic-inner {
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.topic-row:hover .topic-inner,
+.topic-row:focus-within .topic-inner {
+  transform: translateX(0.75rem);
+}
+
+/* ---------------------------------------------------------------------------
+   Reveal initial states — ONLY when motion is allowed (html.motion is added
+   by an inline script gated on prefers-reduced-motion). Without JS or with
+   reduced motion, everything is fully visible.
+--------------------------------------------------------------------------- */
+html.motion [data-reveal] {
+  opacity: 0;
+}
+html.motion .hero-line-inner {
+  opacity: 0;
+}
+html.motion [data-hero-eyebrow],
+html.motion [data-hero-sub],
+html.motion [data-hero-cta] {
+  opacity: 0;
+}
+
+/* Blobs are decorative — never let them catch clicks */
+[data-blob-wrap] {
+  pointer-events: none;
+}
+
+/* Final hard stop for OS-level reduced motion, incl. CSS-only animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

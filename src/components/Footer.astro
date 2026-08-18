@@ -1,0 +1,45 @@
+---
+import { SITE, SOCIALS } from '../config';
+
+const socials = SOCIALS.filter((s) => s.href);
+const year = new Date().getFullYear();
+---
+
+<footer
+  id="contact"
+  data-bg="#16141a"
+  data-fg="#faf6ee"
+  style="background-color:#16141a;color:#faf6ee"
+  class="on-ink section-pad"
+>
+  <div class="wrap">
+    <p class="eyebrow" style="--accent: var(--color-tangerine)" data-reveal>Contact</p>
+    <h2 class="display h-hero mt-6" data-reveal>Let’s talk.</h2>
+    <p class="mt-6 max-w-xl text-lg opacity-80" data-reveal>
+      Advisory, a stage, or something in between — my inbox is open.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4" data-reveal>
+      <a class="btn btn-lg bg-tangerine text-paper" href={`mailto:${SITE.email}`} data-magnetic>
+        {SITE.email}
+      </a>
+      <a class="btn btn-lg bg-paper text-ink" href="#book" data-magnetic>Book time instead</a>
+    </div>
+
+    <div
+      class="mt-20 pt-8 border-t-2 border-paper/25 flex flex-col md:flex-row md:items-center justify-between gap-6"
+    >
+      <ul class="flex flex-wrap gap-6" role="list">
+        {
+          socials.map((s) => (
+            <li>
+              <a class="font-bold underline underline-offset-4 decoration-2" href={s.href} target="_blank" rel="noopener">
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-sm opacity-70">© {year} {SITE.name} · Built with Astro & GSAP · Set in Bricolage Grotesque</p>
+    </div>
+  </div>
+</footer>

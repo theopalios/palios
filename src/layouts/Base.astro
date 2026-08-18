@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import displayFontUrl from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
+import bodyFontUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import { SITE } from '../config';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE.title, description = SITE.description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#faf6ee" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="font" type="font/woff2" href={displayFontUrl} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={bodyFontUrl} crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Motion gate: reveal-initial states and scroll effects only apply when
+      // the visitor is fine with motion. Without JS this never runs and the
+      // page renders fully static and visible.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion');
+      }
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] btn bg-paper text-ink"
+    >
+      Skip to content
+    </a>
+    <Nav />
+    <slot />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

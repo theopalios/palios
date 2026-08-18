@@ -1,0 +1,11 @@
+---
+const phrase = 'Advisor — Speaker — Founder — AI × Health — Digital Biomarkers — ';
+const half = phrase.repeat(2);
+---
+
+<div class="marquee py-10 md:py-16" data-marquee>
+  <div class="marquee-track" data-marquee-track>
+    <span class="marquee-half display marquee-text text-outline uppercase">{half}</span>
+    <span class="marquee-half display marquee-text text-outline uppercase" aria-hidden="true">{half}</span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+# build output
+dist/
+# generated types
+.astro/
+# dependencies
+node_modules/
+# logs
+npm-debug.log*
+*.log
+# environment
+.env
+.env.production
+# screenshots from the verification harness
+.shots/
+# OS junk
+.DS_Store

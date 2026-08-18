@@ -1,0 +1,33 @@
+---
+import SectionHeading from './ui/SectionHeading.astro';
+import { testimonials } from '../data/testimonials';
+---
+
+<section
+  id="testimonials"
+  data-bg="#faf6ee"
+  data-fg="#16141a"
+  style="background-color:#faf6ee;color:#16141a"
+  class="section-pad"
+>
+  <div class="wrap">
+    <SectionHeading eyebrow="Word of mouth" title="What people say." accent="var(--color-cobalt)" />
+    <div class="mt-12 grid md:grid-cols-3 gap-8">
+      {
+        testimonials.map((t) => (
+          <figure class={`block-card p-7 md:p-8 flex flex-col gap-5 ${t.cardClass}`} data-reveal="toss">
+            <span class="display text-6xl leading-[0.6]" aria-hidden="true">
+              ”
+            </span>
+            <blockquote class="text-lg font-medium leading-snug">{t.quote}</blockquote>
+            <figcaption class="mt-auto text-sm">
+              <strong>{t.name}</strong>
+              <br />
+              <span class="opacity-70">{t.role}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
