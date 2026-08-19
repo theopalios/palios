@@ -10,7 +10,29 @@ export const SITE = {
     'Founder of Unicorn Labs, building Noetika — speech-based cognitive assessment. ' +
     'Advisor to health-tech teams shipping AI into regulated care, and speaker on AI in healthcare.',
   email: 'theo@unicornlabs.nl',
-  location: 'Netherlands ⇄ Singapore',
+  url: 'https://palios.io',
+  /** Shown after "Advisor · Speaker · Founder" in the hero. Leave '' to hide it. */
+  location: 'Singapore',
+};
+
+/**
+ * Visual theme. Swap this one value to restyle the whole site:
+ *  'colorblock'  — bold saturated color blocks on warm paper (current)
+ *  'editorial'   — restrained, type-led, one accent + two dramatic full-bleeds
+ *  'terracotta'  — warm retro-print: clay, teal, mustard, heavy ink
+ *  'nocturne'    — dark canvas with luminous blocks
+ * Palettes live in src/styles/global.css under :root[data-theme='…'].
+ */
+export const THEME: 'colorblock' | 'editorial' | 'terracotta' | 'nocturne' = 'colorblock';
+
+/** The Weak Signals newsletter — archive lives at /blog. */
+export const NEWSLETTER = {
+  name: 'Weak Signals',
+  description:
+    'A weekly read on the early indicators in AI and healthcare — the shifts that look like noise ' +
+    'until they are not. Published on LinkedIn, archived here.',
+  /** TODO(theo): paste your LinkedIn newsletter URL to enable the Subscribe buttons. */
+  linkedinUrl: '',
 };
 
 export const BOOKING = {
@@ -59,7 +81,7 @@ export const MAILTO = {
 
 /** Socials with an empty href are not rendered — fill them in to show them. */
 export const SOCIALS: { label: string; href: string }[] = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/theopalios/' },
   { label: 'GitHub', href: 'https://github.com/theopalios' },
-  { label: 'LinkedIn', href: '' }, // TODO(theo): add your LinkedIn profile URL
   { label: 'X', href: '' }, // TODO(theo): add your X/Twitter URL, or leave empty
 ];

@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import displayFontUrl from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
 import bodyFontUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
-import { SITE } from '../config';
+import { SITE, THEME } from '../config';
 import Nav from '../components/Nav.astro';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 const { title = SITE.title, description = SITE.description } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-theme={THEME}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

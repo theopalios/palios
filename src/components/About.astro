@@ -1,24 +1,47 @@
 ---
+import fs from 'node:fs';
 import SectionHeading from './ui/SectionHeading.astro';
 import { stats } from '../data/stats';
+
+// Drop a portrait at public/theo.jpg (or .png/.webp) and it replaces the
+// placeholder automatically — no markup change needed.
+const photo = ['theo.jpg', 'theo.jpeg', 'theo.png', 'theo.webp'].find((f) =>
+  fs.existsSync(`public/${f}`),
+);
 ---
 
 <section
   id="about"
-  data-bg="#2b3ff3"
-  data-fg="#faf6ee"
-  style="background-color:#2b3ff3;color:#faf6ee"
+  data-sec="about"
+  style="background-color:var(--sec-about-bg);color:var(--sec-about-fg)"
   class="section-pad"
 >
   <div class="wrap">
     <div class="grid md:grid-cols-12 gap-10 md:gap-14 items-start">
       <div class="md:col-span-5" data-reveal="wipe">
-        <!-- TODO(theo): swap this placeholder for a real portrait photo -->
         <div class="block-card bg-sunflower text-ink aspect-[4/5] relative overflow-hidden">
-          <span class="display absolute inset-0 grid place-items-center text-[clamp(5rem,14vw,9rem)]" aria-hidden="true">
-            TP
-          </span>
-          <span class="chip bg-paper absolute bottom-4 left-4">Portrait — coming soon</span>
+          {
+            photo ? (
+              <img
+                src={`/${photo}`}
+                alt="Theo Palios"
+                width="800"
+                height="1000"
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <>
+                <span
+                  class="display absolute inset-0 grid place-items-center text-[clamp(5rem,14vw,9rem)]"
+                  aria-hidden="true"
+                >
+                  TP
+                </span>
+                {/* TODO(theo): add public/theo.jpg to replace this placeholder */}
+                <span class="chip bg-paper absolute bottom-4 left-4">Portrait — coming soon</span>
+              </>
+            )
+          }
         </div>
       </div>
 
@@ -26,18 +49,24 @@ import { stats } from '../data/stats';
         <SectionHeading eyebrow="About" title="Building AI that listens." accent="var(--color-sunflower)" />
         <!-- TODO(theo): confirm bio facts — years, cities, and how you want Noetika described -->
         <div class="mt-8 space-y-5 text-lg max-w-2xl" data-reveal-group>
+          <!-- TODO(theo): finish the first line in your own words — your LinkedIn About opens
+               "I spent eight years building software at companies like Nokia — until Alzheimer's
+               became…" and the rest is behind LinkedIn's login wall. -->
           <p data-reveal>
-            I’m Theo — founder of Unicorn Labs and the person behind Noetika, a platform that treats
-            speech as a window on the brain. We help clinicians catch Alzheimer’s, Parkinson’s and
-            cognitive decline earlier, just by listening to how people talk.
+            I spent eight years building software — at Nokia, then running engineering teams — until
+            Alzheimer’s pulled me somewhere else entirely.
           </p>
           <p data-reveal>
-            Taking AI from a promising model to something a hospital actually deploys — across Europe
-            and Asia — taught me what no playbook covers: validation, regulation, procurement, and the
-            thousand small decisions between a demo and a deployment.
+            Today I’m CEO of Unicorn Labs, where we build Noetika: AI that listens to how people speak
+            and helps clinicians catch cognitive decline earlier. Voice turns out to be one of the most
+            honest signals the brain gives us — our detection reaches 0.96 AUC, in five languages, with
+            seven research and clinical partners across Europe and Asia.
           </p>
           <p data-reveal>
-            That’s what I advise on, and what I speak about: making AI useful where the stakes are real.
+            Getting there taught me what no playbook covers: validation, regulation, procurement, and
+            the thousand small decisions between a demo and a deployment. That’s what I advise teams
+            on, what I mentor on at Google for Startups and Startupbootcamp, and what I talk about on
+            stage.
           </p>
         </div>
       </div>

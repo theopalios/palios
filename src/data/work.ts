@@ -15,50 +15,49 @@ export const work: WorkItem[] = [
   {
     index: '01',
     title: 'Noetika',
-    role: 'Founder',
-    period: '2023 — now', // TODO(theo): confirm start year
+    role: 'Founder & CEO',
+    period: '2024 — now', // TODO(theo): noetika.ai says founded 2024, LinkedIn/Tracxn say 2023 — which is right?
     description:
       'Speech-based cognitive assessment. AI that listens to how people speak to help clinicians ' +
-      'screen for Alzheimer’s, Parkinson’s and cognitive decline earlier — from first screening to ' +
-      'longitudinal monitoring, integrated into clinical workflows.',
+      'screen for Alzheimer’s and cognitive decline earlier — 0.96 detection AUC, five languages, ' +
+      'MMSE and MoCA supported, with a clinician always making the final call.',
     tags: ['AI', 'Healthcare', 'Voice'],
     href: 'https://noetika.ai',
     cardClass: 'bg-lime text-ink',
-    todo: 'TODO(theo): add one concrete outcome metric and named partners (with permission)',
   },
   {
     index: '02',
     title: 'Unicorn Labs',
-    role: 'Founder',
-    period: '—', // TODO(theo): year
+    role: 'Founder & CEO',
+    period: '2023 — now',
     description:
-      'The venture vehicle behind Noetika. Building AI products for healthcare from the Netherlands, ' +
-      'deploying them with partners across Europe and Asia.',
-    tags: ['Venture', 'AI'],
+      'The deep-tech company behind Noetika. Startupbootcamp DeepTech & Robotics cohort, Google for ' +
+      'Startups Accelerator, and pilots with partners including A*STAR, NTU Singapore, University of ' +
+      'Groningen and VinUniversity.',
+    tags: ['Deep tech', 'Venture'],
     href: 'https://unicornlabs.nl',
     cardClass: 'bg-sunflower text-ink',
-    todo: 'TODO(theo): sharpen the one-liner — what is Unicorn Labs to you?',
   },
   {
     index: '03',
-    title: 'Your next case study',
-    role: 'Advisor',
-    period: 'TODO',
+    title: 'Google for Startups',
+    role: 'Mentor',
+    period: '2026 — now',
     description:
-      'TODO(theo): a project or advisory engagement you can talk about — the team, what you did, ' +
-      'and the outcome in one number if you have it.',
-    tags: ['Placeholder'],
+      'Mentoring founders in the Google for Startups Accelerator — AI product strategy, getting from ' +
+      'a working model to something a customer will actually deploy.',
+    tags: ['Mentoring', 'AI'],
     cardClass: 'bg-magenta text-paper',
   },
   {
     index: '04',
-    title: 'On stage',
-    role: 'Speaker',
-    period: 'TODO',
+    title: 'Startupbootcamp',
+    role: 'Mentor',
+    period: '2025 — now',
     description:
-      'TODO(theo): a talk or keynote that landed well — event, audience, and the one idea people ' +
-      'quoted back at you afterwards.',
-    tags: ['Placeholder'],
+      'Mentor to deep-tech and health-tech teams, after going through the DeepTech & Robotics ' +
+      'programme with Unicorn Labs and pitching at Impact Day in Amsterdam.',
+    tags: ['Mentoring', 'Deep tech'],
     cardClass: 'bg-paper text-ink',
   },
 ];

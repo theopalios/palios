@@ -16,7 +16,17 @@ import { mkdirSync, readdirSync, existsSync } from 'node:fs';
 const PORT = 4321;
 const BASE = `http://localhost:${PORT}`;
 const OUT = '.shots';
-const SECTIONS = ['top', 'about', 'services', 'work', 'speaking', 'testimonials', 'book', 'contact'];
+const SECTIONS = [
+  'top',
+  'about',
+  'services',
+  'work',
+  'speaking',
+  'writing',
+  'testimonials',
+  'book',
+  'contact',
+];
 
 const browsersDir = process.env.PLAYWRIGHT_BROWSERS_PATH ?? '/opt/pw-browsers';
 const chromeDir = existsSync(browsersDir)
@@ -125,10 +135,10 @@ async function wheelToTop(page) {
 
 async function anchorNav(page, tag) {
   for (const [link, target] of [
-    ['a[href="#about"]', '#about'],
-    ['a[href="#work"]', '#work'],
-    ['a[href="#speaking"]', '#speaking'],
-    ['a[href="#book"]', '#book'],
+    ['a[href="/#about"]', '#about'],
+    ['a[href="/#work"]', '#work'],
+    ['a[href="/#speaking"]', '#speaking'],
+    ['a[href="/#book"]', '#book'],
   ]) {
     await waitForScrollSettle(page);
     await wheelToTop(page);

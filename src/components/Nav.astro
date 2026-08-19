@@ -1,19 +1,22 @@
 ---
+// Links are absolute so they work from /blog pages too; smooth-scroll.ts
+// intercepts them when the target section is on the current page.
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'Speaking', href: '#speaking' },
+  { label: 'About', href: '/#about' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Speaking', href: '/#speaking' },
+  { label: 'Writing', href: '/blog' },
 ];
 ---
 
 <header class="site-nav" data-nav>
   <div class="wrap h-full flex items-center justify-between gap-4">
-    <a href="#top" class="display text-2xl tracking-tight" aria-label="Theo Palios — back to top">
+    <a href="/" class="display text-2xl tracking-tight" aria-label="Theo Palios — home">
       TP<span class="text-tangerine">.</span>
     </a>
     <nav aria-label="Primary" class="hidden md:flex items-center gap-8">
       {links.map((l) => <a class="nav-link" href={l.href}>{l.label}</a>)}
     </nav>
-    <a href="#book" class="btn bg-ink text-paper text-sm" data-magnetic>Book a call</a>
+    <a href="/#book" class="btn bg-ink text-paper text-sm" data-magnetic>Book a call</a>
   </div>
 </header>

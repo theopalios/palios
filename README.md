@@ -20,24 +20,64 @@ its DNS records point at Google (see `DEPLOY.md`).
 | `npm run build`   | Production build into `dist/`                                       |
 | `npm run preview` | Serve the production build locally                                  |
 | `npm run shots`   | Visual verification: screenshots + motion/anchor/reduced-motion checks into `.shots/` |
+| `npm run themes`  | Renders the site in all four themes and writes comparison sheets to `.shots/` |
 
 ## Editing content — no markup required
 
 All copy lives in two places:
 
-- **`src/config.ts`** — your name, meta description, email, booking URLs, social links.
+- **`src/config.ts`** — your name, meta description, email, booking URLs, social links, theme.
 - **`src/data/*.ts`** — services, work/portfolio cards, talk topics, venues, testimonials, stats.
 
 Search the repo for **`TODO(theo)`** to find everything awaiting your confirmation:
 
-- [ ] Bio wording & facts in `src/components/About.astro`
-- [ ] Stats (all four numbers) in `src/data/stats.ts`
-- [ ] Work cards 3 & 4 (real case studies) + Noetika outcome metric in `src/data/work.ts`
-- [ ] Talk titles + "recently on stage at" venues in `src/data/talks.ts`
+- [ ] First bio line in `src/components/About.astro` — finish the Alzheimer's sentence in your words
+- [ ] Stats in `src/data/stats.ts` (sourced from noetika.ai — confirm each)
+- [ ] Noetika founding year in `src/data/work.ts` (noetika.ai says 2024, LinkedIn says 2023)
+- [ ] Talk titles and the "Recent rooms" list in `src/data/talks.ts`
 - [ ] Three real testimonials in `src/data/testimonials.ts`
-- [ ] LinkedIn / X URLs in `src/config.ts` (empty links are hidden automatically)
-- [ ] Portrait photo — replace the placeholder card in `src/components/About.astro`
-- [ ] Final domain in `astro.config.mjs` (`site:`) once you map one
+- [ ] `NEWSLETTER.linkedinUrl` in `src/config.ts` — enables the Subscribe buttons
+- [ ] X URL in `src/config.ts` (empty links are hidden automatically)
+- [ ] Portrait photo — see below
+
+## Your photo
+
+Drop a portrait at **`public/theo.jpg`** (`.png` and `.webp` also work) and it replaces the
+"TP" placeholder in the About section automatically — no code change. Portrait crop, ideally
+around 800×1000 or larger; the card is 4:5 and the image is centre-cropped to fill it.
+
+## Weak Signals — the weekly newsletter
+
+Every issue is a markdown file in **`src/content/blog/`**. The filename becomes the URL, so
+`src/content/blog/signal-vs-noise.md` publishes at `/blog/signal-vs-noise`.
+
+**Weekly workflow** — after publishing on LinkedIn:
+
+1. Copy `src/content/blog/_example-issue.md` to a new file named after the issue.
+2. Fill in the frontmatter (`title`, `description`, `pubDate`, optional `linkedin` link to the
+   LinkedIn issue, optional `tags`, optional `color`), and remove `draft: true`.
+3. Paste the issue body underneath as markdown.
+4. Commit and push, then redeploy (`DEPLOY.md`).
+
+The archive lives at `/blog`, the three newest issues appear on the homepage, and `/rss.xml`
+is generated automatically. Files starting with `_` or marked `draft: true` never publish.
+Images go in `public/blog/` and are referenced as `/blog/name.jpg`.
+
+## Themes
+
+`THEME` in `src/config.ts` restyles the whole site — palettes are defined in
+`src/styles/global.css` under `:root[data-theme='…']`:
+
+| Theme | Look |
+| ----- | ---- |
+| `colorblock` | Saturated blocks on warm paper (current) |
+| `editorial` | Restrained and type-led: one accent, two dramatic full-bleed sections |
+| `terracotta` | Warm retro-print — clay, teal and mustard on cream |
+| `nocturne` | Dark canvas with luminous color blocks |
+
+Run `npm run themes` to regenerate the side-by-side comparison sheets. Sections pick their
+colors from `--sec-*` custom properties, so a theme only has to remap those and the palette;
+Tailwind utilities (`bg-lime`, `text-ink`, borders, shadows) follow automatically.
 
 ## Booking (Google Calendar)
 
