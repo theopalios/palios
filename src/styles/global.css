@@ -64,6 +64,15 @@ html.motion [data-sec] {
    var(--color-*), so bg-lime, text-ink, borders and shadows all follow.
 --------------------------------------------------------------------------- */
 
+/* Text on a tangerine fill: bright oranges need ink, deep clay takes cream.
+   Used by the buttons that sit on --color-tangerine. */
+.on-tangerine {
+  color: var(--fg-on-tangerine, var(--color-ink));
+}
+:root[data-theme='terracotta'] {
+  --fg-on-tangerine: var(--color-paper);
+}
+
 /* Editorial — restrained, type-led, one accent and two dramatic full-bleeds */
 :root[data-theme='editorial'] {
   --color-paper: #fbfaf7;
@@ -94,7 +103,7 @@ html.motion [data-sec] {
   --color-paper: #f6ecdd;
   --color-ink: #241a12;
   --color-cobalt: #1f5f5b;
-  --color-tangerine: #d1441f;
+  --color-tangerine: #b83a17;
   --color-lime: #e2c66b;
   --color-magenta: #a83246;
   --color-sunflower: #edb54b;
