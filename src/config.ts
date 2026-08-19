@@ -23,7 +23,7 @@ export const SITE = {
  *  'nocturne'    — dark canvas with luminous blocks
  * Palettes live in src/styles/global.css under :root[data-theme='…'].
  */
-export const THEME: 'colorblock' | 'editorial' | 'terracotta' | 'nocturne' = 'colorblock';
+export const THEME: 'colorblock' | 'editorial' | 'terracotta' | 'nocturne' = 'terracotta';
 
 /** The Weak Signals newsletter — archive lives at /blog. */
 export const NEWSLETTER = {
