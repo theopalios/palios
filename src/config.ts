@@ -28,11 +28,12 @@ export const THEME: 'colorblock' | 'editorial' | 'terracotta' | 'nocturne' = 'te
 /** The Weak Signals newsletter — archive lives at /blog. */
 export const NEWSLETTER = {
   name: 'Weak Signals',
+  /** Tagline is Theo's own, from the LinkedIn newsletter page. */
+  tagline: 'AI, healthcare, and companies built from zero.',
   description:
-    'A weekly read on the early indicators in AI and healthcare — the shifts that look like noise ' +
-    'until they are not. Published on LinkedIn, archived here.',
-  /** TODO(theo): paste your LinkedIn newsletter URL to enable the Subscribe buttons. */
-  linkedinUrl: '',
+    'AI, healthcare, and companies built from zero. A weekly letter — published on LinkedIn, ' +
+    'archived here.',
+  linkedinUrl: 'https://www.linkedin.com/newsletters/weak-signals-7495696316249972736/',
 };
 
 export const BOOKING = {
