@@ -6,9 +6,8 @@ import { MAILTO } from '../config';
 
 <section
   id="speaking"
-  data-bg="#ff4d24"
-  data-fg="#faf6ee"
-  style="background-color:#ff4d24;color:#faf6ee"
+  data-sec="speaking"
+  style="background-color:var(--sec-speaking-bg);color:var(--sec-speaking-fg)"
   class="section-pad"
 >
   <div class="wrap">
@@ -35,7 +34,7 @@ import { MAILTO } from '../config';
     <!-- TODO(theo): replace placeholder venues with real ones -->
     <div class="mt-14 flex flex-wrap items-center gap-3" data-reveal-group>
       <span class="text-sm uppercase tracking-[0.14em] font-bold opacity-80 mr-2" data-reveal>
-        Recently on stage at
+        Recent rooms
       </span>
       {spokenAt.map((v) => <span class="chip" data-reveal>{v}</span>)}
     </div>

@@ -62,7 +62,18 @@ image, and Cloud Run serves it. The command prints your public
 
 ## Custom domain
 
-Done for **palios.io** (mapping exists; `site` is set in `astro.config.mjs`):
+**palios.io is live** — DNS is pointing at Google, the certificate is issued, and
+<https://palios.io> serves the site over HTTPS.
+
+A mapping for **www.palios.io** also exists but is waiting on one DNS record:
+
+| Type | Name | Value |
+| ---- | ---- | -------------------- |
+| CNAME | www | ghs.googlehosted.com. |
+
+Add that at the registrar and `www.palios.io` starts serving too (certificate is automatic).
+
+The apex records already in place:
 
 ```bash
 gcloud beta run domain-mappings create --service palios-site --region europe-west4 --domain palios.io

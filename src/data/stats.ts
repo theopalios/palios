@@ -4,10 +4,13 @@ export interface Stat {
   label: string;
 }
 
-/* TODO(theo): confirm every number before launch — these are placeholders in a plausible shape */
+/*
+ * Sourced from noetika.ai and Theo's own history — confirm before launch.
+ * 0.96 is shown as a percentage-style figure because count-ups animate integers.
+ */
 export const stats: Stat[] = [
-  { value: 10, suffix: '+', label: 'clinical partners' },
-  { value: 25, suffix: '+', label: 'stages & panels' },
-  { value: 2, suffix: '', label: 'continents, one product' },
-  { value: 30, suffix: 'min', label: 'to get on my calendar' },
+  { value: 8, suffix: ' yrs', label: 'shipping software before founding' },
+  { value: 7, suffix: '', label: 'research & clinical partners' },
+  { value: 5, suffix: '', label: 'languages supported' },
+  { value: 30, suffix: ' min', label: 'to get on my calendar' },
 ];

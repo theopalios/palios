@@ -22,7 +22,7 @@
    reduced-motion fallback shows them statically); when motion is on, sections
    go transparent and the body paints them via the tweened vars.
 --------------------------------------------------------------------------- */
-html.motion [data-bg] {
+html.motion [data-sec] {
   background-color: transparent !important;
   color: inherit !important;
 }
@@ -33,6 +33,127 @@ html.motion [data-bg] {
   --accent: var(--color-cobalt);
   --shadow-c: var(--color-ink);
   --nav-h: 4.5rem;
+
+  /* Which palette color each section wears. Themes below remap these; sections
+     reference them by name (data-sec="about") so nothing is hardcoded. */
+  --sec-hero-bg: var(--color-paper);
+  --sec-hero-fg: var(--color-ink);
+  --sec-about-bg: var(--color-cobalt);
+  --sec-about-fg: var(--color-paper);
+  --sec-services-bg: var(--color-lime);
+  --sec-services-fg: var(--color-ink);
+  --sec-work-bg: var(--color-violet);
+  --sec-work-fg: var(--color-paper);
+  --sec-speaking-bg: var(--color-tangerine);
+  --sec-speaking-fg: var(--color-paper);
+  --sec-writing-bg: var(--color-magenta);
+  --sec-writing-fg: var(--color-paper);
+  --sec-testimonials-bg: var(--color-paper);
+  --sec-testimonials-fg: var(--color-ink);
+  --sec-book-bg: var(--color-sunflower);
+  --sec-book-fg: var(--color-ink);
+  --sec-footer-bg: var(--color-ink);
+  --sec-footer-fg: var(--color-paper);
+  --sec-blog-bg: var(--color-paper);
+  --sec-blog-fg: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------------
+   THEMES — set data-theme on <html> (driven by THEME in src/config.ts).
+   Each theme redefines the palette; Tailwind v4 emits utilities as
+   var(--color-*), so bg-lime, text-ink, borders and shadows all follow.
+--------------------------------------------------------------------------- */
+
+/* Editorial — restrained, type-led, one accent and two dramatic full-bleeds */
+:root[data-theme='editorial'] {
+  --color-paper: #fbfaf7;
+  --color-ink: #14130f;
+  --color-cobalt: #2222dd;
+  --color-tangerine: #b8420f;
+  --color-lime: #eceae2;
+  --color-magenta: #8b1d5e;
+  --color-sunflower: #f0ece1;
+  --color-violet: #e6e2f5;
+
+  --sec-about-bg: #f1efe8;
+  --sec-about-fg: var(--color-ink);
+  --sec-services-bg: var(--color-paper);
+  --sec-services-fg: var(--color-ink);
+  --sec-work-bg: var(--color-ink);
+  --sec-work-fg: var(--color-paper);
+  --sec-speaking-bg: var(--color-paper);
+  --sec-speaking-fg: var(--color-ink);
+  --sec-writing-bg: #f1efe8;
+  --sec-writing-fg: var(--color-ink);
+  --sec-book-bg: var(--color-cobalt);
+  --sec-book-fg: var(--color-paper);
+}
+
+/* Terracotta — warm retro-print, earthy blocks, heavy ink */
+:root[data-theme='terracotta'] {
+  --color-paper: #f6ecdd;
+  --color-ink: #241a12;
+  --color-cobalt: #1f5f5b;
+  --color-tangerine: #d1441f;
+  --color-lime: #e2c66b;
+  --color-magenta: #a83246;
+  --color-sunflower: #edb54b;
+  --color-violet: #7a4b3a;
+
+  --sec-about-bg: var(--color-cobalt);
+  --sec-about-fg: var(--color-paper);
+  --sec-services-bg: var(--color-lime);
+  --sec-services-fg: var(--color-ink);
+  --sec-work-bg: var(--color-violet);
+  --sec-work-fg: var(--color-paper);
+  --sec-speaking-bg: var(--color-tangerine);
+  --sec-speaking-fg: var(--color-paper);
+  --sec-writing-bg: var(--color-magenta);
+  --sec-writing-fg: var(--color-paper);
+  --sec-book-bg: var(--color-sunflower);
+  --sec-book-fg: var(--color-ink);
+}
+
+/* Nocturne — dark canvas, luminous blocks. paper/ink swap roles as a pair,
+   so every bg/text utility pairing keeps its contrast. */
+:root[data-theme='nocturne'] {
+  --color-paper: #0d0d12;
+  --color-ink: #f3f2f7;
+  --color-cobalt: #1b2a8f;
+  --color-tangerine: #8f2a12;
+  --color-lime: #24421a;
+  --color-magenta: #7a1f52;
+  --color-sunflower: #6b4a12;
+  --color-violet: #3a2472;
+
+  /* paper is the dark canvas here, so every section's text is --color-ink */
+  --sec-hero-bg: var(--color-paper);
+  --sec-hero-fg: var(--color-ink);
+  --sec-about-fg: var(--color-ink);
+  --sec-work-fg: var(--color-ink);
+  --sec-speaking-fg: var(--color-ink);
+  --sec-writing-fg: var(--color-ink);
+  --sec-testimonials-bg: #14141c;
+  --sec-testimonials-fg: var(--color-ink);
+  --sec-book-bg: var(--color-cobalt);
+  --sec-book-fg: var(--color-ink);
+  --sec-footer-bg: #05050a;
+  --sec-footer-fg: var(--color-ink);
+  --sec-blog-bg: var(--color-paper);
+  --sec-blog-fg: var(--color-ink);
+}
+/* On a dark canvas the offset shadow reads as a glow, and the hero accent
+   wants to be luminous rather than deep. */
+:root[data-theme='nocturne'] .text-cobalt {
+  color: #7d92ff;
+}
+:root[data-theme='nocturne'] .prose code {
+  background: rgba(243, 242, 247, 0.1);
+  border-color: rgba(243, 242, 247, 0.2);
+}
+:root[data-theme='nocturne'] .prose blockquote {
+  background: var(--color-violet);
+  color: var(--color-ink);
 }
 
 html {
@@ -361,6 +482,112 @@ html.lenis body {
 .topic-row:hover .topic-inner,
 .topic-row:focus-within .topic-inner {
   transform: translateX(0.75rem);
+}
+
+/* ---------------------------------------------------------------------------
+   Prose — markdown article bodies (Weak Signals issues)
+--------------------------------------------------------------------------- */
+.prose {
+  max-width: 44rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.prose > * + * {
+  margin-top: 1.4em;
+}
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-top: 2.2em;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.15;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  margin-top: 1.8em;
+}
+.prose a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-magenta);
+}
+.prose a:hover {
+  background: var(--color-lime);
+}
+.prose strong {
+  font-weight: 700;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+}
+.prose ul {
+  list-style: square;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li + li {
+  margin-top: 0.4em;
+}
+.prose li::marker {
+  color: var(--color-magenta);
+  font-weight: 700;
+}
+.prose blockquote {
+  border: 2px solid var(--color-ink);
+  border-radius: 1.25rem;
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+  background: var(--color-sunflower);
+  color: var(--color-ink);
+  padding: 1.5rem 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.prose blockquote > * + * {
+  margin-top: 0.6em;
+}
+.prose code {
+  font-size: 0.9em;
+  background: rgba(22, 20, 26, 0.07);
+  border: 1px solid rgba(22, 20, 26, 0.15);
+  border-radius: 0.35rem;
+  padding: 0.1em 0.35em;
+}
+.prose pre {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+}
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--color-ink);
+  border-radius: 1.25rem;
+}
+.prose hr {
+  border: 0;
+  border-top: 2px solid var(--color-ink);
+  opacity: 0.25;
+  margin-block: 2.5em;
 }
 
 /* ---------------------------------------------------------------------------

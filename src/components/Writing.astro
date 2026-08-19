@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeading from './ui/SectionHeading.astro';
+import { NEWSLETTER } from '../config';
+import { formatDate, readingTime } from '../lib/posts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<section
+  id="writing"
+  data-sec="writing"
+  style="background-color:var(--sec-writing-bg);color:var(--sec-writing-fg)"
+  class="section-pad"
+>
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <SectionHeading
+        eyebrow="Writing"
+        title={NEWSLETTER.name}
+        accent="var(--color-lime)"
+      />
+      <a class="btn bg-paper text-ink" href="/blog" data-magnetic>All issues →</a>
+    </div>
+
+    <p class="mt-6 max-w-2xl text-lg" data-reveal>{NEWSLETTER.description}</p>
+
+    {
+      posts.length > 0 ? (
+        <ul class="mt-12 grid gap-6 md:grid-cols-3" data-reveal-group role="list">
+          {posts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.id}`}
+                class="block-card bg-paper text-ink block h-full p-6 transition-transform duration-300 hover:-translate-y-1.5"
+                data-reveal
+              >
+                <div class="text-xs font-bold uppercase tracking-[0.14em] opacity-70">
+                  <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                  {' · '}
+                  {readingTime(post.body)} min
+                </div>
+                <h3 class="display text-2xl mt-3">{post.data.title}</h3>
+                <p class="mt-2 text-[0.95rem] leading-relaxed">{post.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="mt-12 block-card bg-paper text-ink p-8 max-w-2xl" data-reveal>
+          <p class="display text-2xl">Issue one is on its way.</p>
+          <p class="mt-3">
+            Weekly notes on what is actually changing in AI and healthcare — every issue gets
+            archived here.
+          </p>
+          {NEWSLETTER.linkedinUrl && (
+            <a class="btn bg-ink text-paper mt-6" href={NEWSLETTER.linkedinUrl} target="_blank" rel="noopener">
+              Subscribe on LinkedIn
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>

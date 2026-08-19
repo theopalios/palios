@@ -17,14 +17,19 @@ export function initSmoothScroll(): Lenis {
 
   // Anchor navigation goes through Lenis so it glides (and lands correctly
   // even past pinned sections, whose spacers are part of the document flow).
-  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+  // Handles both "#work" and cross-page "/#work" — the latter only when the
+  // target section exists on the page we are already on, otherwise the browser
+  // navigates normally.
+  document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
-      const href = a.getAttribute('href');
-      if (!href || href.length <= 1) return;
-      const target = document.querySelector<HTMLElement>(href);
+      const url = new URL(a.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname !== window.location.pathname) return;
+      if (!url.hash || url.hash.length <= 1) return;
+      const target = document.querySelector<HTMLElement>(url.hash);
       if (!target) return;
       e.preventDefault();
-      lenis.scrollTo(target, { offset: href === '#top' ? 0 : -12, duration: 1.4 });
+      lenis.scrollTo(target, { offset: url.hash === '#top' ? 0 : -12, duration: 1.4 });
     });
   });
 

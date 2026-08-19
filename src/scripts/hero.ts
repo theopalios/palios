@@ -11,6 +11,14 @@ export function initHero(): void {
 
   const lines = hero.querySelectorAll<HTMLElement>('.hero-line-inner');
   const accent = hero.querySelector<HTMLElement>('[data-hero-accent]');
+
+  // Roll through the active theme's palette and land on the accent's own
+  // resolved color, so the intro re-tints itself when the theme changes.
+  const rootStyle = getComputedStyle(document.documentElement);
+  const token = (name: string) => rootStyle.getPropertyValue(name).trim();
+  const settled = accent ? getComputedStyle(accent).color : token('--color-cobalt');
+  const roll = [token('--color-magenta'), token('--color-tangerine'), settled].filter(Boolean);
+
   const chars = accent ? splitChars(accent) : [];
 
   gsap.set(lines, { yPercent: 110, opacity: 1 });
@@ -26,11 +34,7 @@ export function initHero(): void {
     .to(
       chars,
       {
-        keyframes: [
-          { color: '#f2409b' },
-          { color: '#ff4d24' },
-          { color: '#2b3ff3' },
-        ],
+        keyframes: roll.map((color) => ({ color })),
         duration: 0.9,
         stagger: 0.06,
         ease: 'none',

@@ -7,9 +7,8 @@ import Blob from './ui/Blob.astro';
 <section
   id="top"
   data-hero
-  data-bg="#faf6ee"
-  data-fg="#16141a"
-  style="background-color:#faf6ee;color:#16141a"
+  data-sec="hero"
+  style="background-color:var(--sec-hero-bg);color:var(--sec-hero-fg)"
   class="relative min-h-svh flex flex-col justify-center overflow-hidden"
 >
   <div data-blob-wrap data-speed="1.4" class="absolute top-[13%] right-[6%] w-24 md:w-40 text-sunflower">
@@ -30,7 +29,7 @@ import Blob from './ui/Blob.astro';
 
   <div class="wrap relative z-10 pt-28 pb-20" data-hero-content>
     <p class="eyebrow" style="--accent: var(--color-magenta)" data-hero-eyebrow>
-      Advisor · Speaker · Founder — {SITE.location}
+      Advisor · Speaker · Founder{SITE.location && ` — ${SITE.location}`}
     </p>
     <h1 class="display h-hero mt-8">
       <span class="hero-line"><span class="hero-line-inner">Theo Palios.</span></span>

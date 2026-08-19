@@ -16,7 +16,17 @@ import { mkdirSync, readdirSync, existsSync } from 'node:fs';
 const PORT = 4321;
 const BASE = `http://localhost:${PORT}`;
 const OUT = '.shots';
-const SECTIONS = ['top', 'about', 'services', 'work', 'speaking', 'testimonials', 'book', 'contact'];
+const SECTIONS = [
+  'top',
+  'about',
+  'services',
+  'work',
+  'speaking',
+  'writing',
+  'testimonials',
+  'book',
+  'contact',
+];
 
 const browsersDir = process.env.PLAYWRIGHT_BROWSERS_PATH ?? '/opt/pw-browsers';
 const chromeDir = existsSync(browsersDir)
@@ -125,10 +135,10 @@ async function wheelToTop(page) {
 
 async function anchorNav(page, tag) {
   for (const [link, target] of [
-    ['a[href="#about"]', '#about'],
-    ['a[href="#work"]', '#work'],
-    ['a[href="#speaking"]', '#speaking'],
-    ['a[href="#book"]', '#book'],
+    ['a[href="/#about"]', '#about'],
+    ['a[href="/#work"]', '#work'],
+    ['a[href="/#speaking"]', '#speaking'],
+    ['a[href="/#book"]', '#book'],
   ]) {
     await waitForScrollSettle(page);
     await wheelToTop(page);
@@ -164,15 +174,24 @@ async function reducedMotionAudit(page, tag) {
       // deliberate opacity-XX utilities are fine; reveal-hidden means ~0
       if (Number(cs.opacity) < 0.1 || cs.visibility === 'hidden') out.hiddenCount++;
     });
+    // Without motion, sections must paint their own themed background rather
+    // than relying on the body morph — compare against the active theme's token.
     const about = document.querySelector('#about');
-    if (about) out.aboutBg = getComputedStyle(about).backgroundColor;
+    if (about) {
+      out.aboutBg = getComputedStyle(about).backgroundColor;
+      const probe = document.createElement('div');
+      probe.style.backgroundColor = 'var(--sec-about-bg)';
+      document.body.appendChild(probe);
+      out.expectedBg = getComputedStyle(probe).backgroundColor;
+      probe.remove();
+    }
     const h1 = document.querySelector('h1');
     if (h1) out.heroVisible = h1.getBoundingClientRect().height > 0;
     return out;
   });
   if (audit.hiddenCount > 0) problems.push(`[${tag}] ${audit.hiddenCount} elements hidden without motion`);
-  if (audit.aboutBg !== 'rgb(43, 63, 243)') {
-    problems.push(`[${tag}] #about static background is ${audit.aboutBg}, expected rgb(43, 63, 243)`);
+  if (audit.aboutBg !== audit.expectedBg) {
+    problems.push(`[${tag}] #about static background is ${audit.aboutBg}, expected ${audit.expectedBg}`);
   }
   if (!audit.heroVisible) problems.push(`[${tag}] hero headline not visible`);
   await page.screenshot({ path: `${OUT}/${tag}-full.png`, fullPage: true });

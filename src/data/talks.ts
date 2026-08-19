@@ -29,15 +29,19 @@ export const topics: Topic[] = [
   {
     index: '04',
     title: 'Building deep-tech between Europe and Asia',
-    blurb: 'Founder lessons from taking a Dutch health-AI product to Singapore.',
+    blurb: 'Founder lessons from taking a health-AI product from Europe into Asia.',
     rowColor: 'var(--color-paper)',
   },
 ];
 
-/* TODO(theo): replace with real events/podcasts you have spoken at */
+/*
+ * Only real, checkable appearances belong here — an empty list renders nothing
+ * rather than something invented.
+ * TODO(theo): add the conferences, panels and podcasts you've done. Worth adding:
+ * SUSS Geronpreneurship Innovation Festival 2026 (Suntec Singapore, 26 Aug 2026)
+ * if you're on a stage there and not only exhibiting.
+ */
 export const spokenAt: string[] = [
-  'Your conference here',
-  'That podcast',
-  'A university guest lecture',
-  'An industry panel',
+  'Startupbootcamp Impact Day — Amsterdam, 2024',
+  'Google for Startups Accelerator — mentor',
 ];
