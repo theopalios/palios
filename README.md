@@ -7,9 +7,9 @@ background morphing, a pinned horizontal work strip, and Google Calendar booking
 Built with [Astro](https://astro.build) 7, Tailwind CSS 4, GSAP ScrollTrigger and Lenis.
 Ships as a static site in an nginx container on Google Cloud Run (see `DEPLOY.md`).
 
-**Live**: <https://palios-site-671297868122.europe-west4.run.app> (Cloud Run service `palios-site`,
-project `palios-site`, region `europe-west4`) · custom domain **palios.io** mapped, serving once
-its DNS records point at Google (see `DEPLOY.md`).
+**Live at [palios.io](https://palios.io)** — Cloud Run service `palios-site`, project
+`palios-site`, region `europe-west4`. The service URL
+<https://palios-site-671297868122.europe-west4.run.app> also works. See `DEPLOY.md` to redeploy.
 
 ## Commands
 
