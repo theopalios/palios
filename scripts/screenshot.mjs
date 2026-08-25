@@ -16,17 +16,10 @@ import { mkdirSync, readdirSync, existsSync } from 'node:fs';
 const PORT = 4321;
 const BASE = `http://localhost:${PORT}`;
 const OUT = '.shots';
-const SECTIONS = [
-  'top',
-  'about',
-  'services',
-  'work',
-  'speaking',
-  'writing',
-  'testimonials',
-  'book',
-  'contact',
-];
+const SECTIONS = ['top', 'about', 'services', 'work', 'speaking', 'writing', 'book', 'contact'];
+// Sections that only render when they have content (e.g. testimonials once real
+// quotes exist) — screenshotted when present, never treated as missing.
+const OPTIONAL_SECTIONS = ['testimonials'];
 
 const browsersDir = process.env.PLAYWRIGHT_BROWSERS_PATH ?? '/opt/pw-browsers';
 const chromeDir = existsSync(browsersDir)
@@ -64,10 +57,10 @@ async function settled(page, ms = 450) {
 
 async function fullAndSections(page, tag) {
   await page.screenshot({ path: `${OUT}/${tag}-full.png`, fullPage: true });
-  for (const id of SECTIONS) {
+  for (const id of [...SECTIONS, ...OPTIONAL_SECTIONS]) {
     const el = page.locator(`#${id}`);
     if ((await el.count()) === 0) {
-      problems.push(`[${tag}] missing section #${id}`);
+      if (!OPTIONAL_SECTIONS.includes(id)) problems.push(`[${tag}] missing section #${id}`);
       continue;
     }
     await el.scrollIntoViewIfNeeded();

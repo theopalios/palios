@@ -32,7 +32,7 @@ export const services: Service[] = [
       'AI in healthcare, beyond the hype',
       'Voice as a digital biomarker',
       'Founder lessons from the clinic',
-      'Tailored formats: 20-min keynote to half-day workshop', // TODO(theo): confirm formats you offer
+      'Tailored formats: 20-min keynote to half-day workshop',
     ],
     cta: { label: 'Send a speaking inquiry', href: '#book' },
     kind: 'speaking',

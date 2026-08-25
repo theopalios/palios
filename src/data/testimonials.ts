@@ -6,29 +6,11 @@ export interface Testimonial {
 }
 
 /*
- * TODO(theo): replace all three with real quotes (name, role, organization —
- * with their permission). Until then these are clearly marked placeholders.
+ * Real quotes only. While this array is empty the whole "What people say"
+ * section is omitted from the page — better a shorter site than invented praise.
+ *
+ * To add one, ask the person for two sentences and their permission, then:
+ *   { quote: '…', name: 'Jane Doe', role: 'CEO, Somewhere', cardClass: 'bg-lime text-ink' }
+ * Card colors available: bg-lime/bg-sunflower text-ink · bg-cobalt/bg-magenta/bg-violet text-paper
  */
-export const testimonials: Testimonial[] = [
-  {
-    quote:
-      'Placeholder — ask a founder you advised for two sentences about what changed after working with you.',
-    name: 'A founder you advised',
-    role: 'TODO — name, role, company',
-    cardClass: 'bg-lime text-ink',
-  },
-  {
-    quote:
-      'Placeholder — ask an event organizer for a line about how your talk landed with their audience.',
-    name: 'An event organizer',
-    role: 'TODO — name, event',
-    cardClass: 'bg-cobalt text-paper',
-  },
-  {
-    quote:
-      'Placeholder — ask a clinical partner what made the collaboration work from their side.',
-    name: 'A clinical partner',
-    role: 'TODO — name, role, institution',
-    cardClass: 'bg-sunflower text-ink',
-  },
-];
+export const testimonials: Testimonial[] = [];
