@@ -3,7 +3,9 @@ import SectionHeading from './ui/SectionHeading.astro';
 import { testimonials } from '../data/testimonials';
 ---
 
-<section
+{
+  testimonials.length > 0 && (
+  <section
   id="testimonials"
   data-sec="testimonials"
   style="background-color:var(--sec-testimonials-bg);color:var(--sec-testimonials-fg)"
@@ -30,3 +32,5 @@ import { testimonials } from '../data/testimonials';
     </div>
   </div>
 </section>
+  )
+}

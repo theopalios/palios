@@ -6,30 +6,34 @@ export interface Topic {
   rowColor: string;
 }
 
-/* TODO(theo): confirm or replace these draft talk titles */
+/** The signature talk — the one with a real title and a real room behind it. */
+export const featuredTalk = {
+  title: 'How to build AI for highly regulated fields',
+  blurb:
+    'What changes when a model has to satisfy regulators, clinicians and procurement — not just a ' +
+    'benchmark. Where the evidence bar actually sits, what slows a deployment down, and the ' +
+    'decisions worth making early.',
+  context: 'Latest talk · Google for Startups Accelerator',
+};
+
+/** Subjects Theo speaks and advises on, beyond the talk above. */
 export const topics: Topic[] = [
   {
     index: '01',
-    title: 'What speech reveals about the brain',
-    blurb: 'Voice as a digital biomarker — the science, the product, and the pitfalls.',
+    title: 'AI',
+    blurb: 'Where it genuinely works, where it does not, and how to tell before you build.',
     rowColor: 'var(--color-lime)',
   },
   {
     index: '02',
-    title: 'Shipping AI into clinical reality',
-    blurb: 'From a promising demo to a deployed tool clinicians actually use.',
+    title: 'Startups',
+    blurb: 'Building from zero — finding the buyer, earning the first pilot, surviving the middle.',
     rowColor: 'var(--color-sunflower)',
   },
   {
     index: '03',
-    title: 'Digital biomarkers, demystified',
-    blurb: 'What actually works for early detection — and what is still hype.',
-    rowColor: 'var(--color-magenta)',
-  },
-  {
-    index: '04',
-    title: 'Building deep-tech between Europe and Asia',
-    blurb: 'Founder lessons from taking a health-AI product from Europe into Asia.',
+    title: 'Innovation',
+    blurb: 'Getting new technology past the pilot and into the way an organisation actually works.',
     rowColor: 'var(--color-paper)',
   },
 ];
@@ -37,11 +41,9 @@ export const topics: Topic[] = [
 /*
  * Only real, checkable appearances belong here — an empty list renders nothing
  * rather than something invented.
- * TODO(theo): add the conferences, panels and podcasts you've done. Worth adding:
- * SUSS Geronpreneurship Innovation Festival 2026 (Suntec Singapore, 26 Aug 2026)
- * if you're on a stage there and not only exhibiting.
+ * TODO(theo): add any conferences, panels and podcasts you want listed.
  */
 export const spokenAt: string[] = [
+  'Google for Startups Accelerator',
   'Startupbootcamp Impact Day — Amsterdam, 2024',
-  'Google for Startups Accelerator — mentor',
 ];
