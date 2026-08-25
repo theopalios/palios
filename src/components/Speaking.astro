@@ -1,6 +1,6 @@
 ---
 import SectionHeading from './ui/SectionHeading.astro';
-import { topics, spokenAt } from '../data/talks';
+import { topics, spokenAt, featuredTalk } from '../data/talks';
 import { MAILTO } from '../config';
 ---
 
@@ -13,7 +13,17 @@ import { MAILTO } from '../config';
   <div class="wrap">
     <SectionHeading eyebrow="Speaking" title="Talks that travel." accent="var(--color-sunflower)" />
 
-    <ul class="mt-12" data-reveal-group role="list">
+    <article class="mt-12 block-card bg-paper text-ink p-8 md:p-10" data-reveal>
+      <span class="chip">{featuredTalk.context}</span>
+      <h3 class="display h-topic mt-5">{featuredTalk.title}</h3>
+      <p class="mt-4 text-lg max-w-2xl">{featuredTalk.blurb}</p>
+    </article>
+
+    <p class="mt-14 text-sm uppercase tracking-[0.14em] font-bold" data-reveal>
+      I also speak and advise on
+    </p>
+
+    <ul class="mt-4" data-reveal-group role="list">
       {
         topics.map((t) => (
           <li class="topic-row" style={`--row-c: ${t.rowColor}`} data-reveal>
@@ -31,12 +41,20 @@ import { MAILTO } from '../config';
       }
     </ul>
 
-    <div class="mt-14 flex flex-wrap items-center gap-3" data-reveal-group>
-      <span class="text-sm uppercase tracking-[0.14em] font-bold opacity-80 mr-2" data-reveal>
-        Recent rooms
-      </span>
-      {spokenAt.map((v) => <span class="chip" data-reveal>{v}</span>)}
-    </div>
+    {
+      spokenAt.length > 0 && (
+        <div class="mt-14 flex flex-wrap items-center gap-3" data-reveal-group>
+          <span class="text-sm uppercase tracking-[0.14em] font-bold mr-2" data-reveal>
+            Recent rooms
+          </span>
+          {spokenAt.map((v) => (
+            <span class="chip" data-reveal>
+              {v}
+            </span>
+          ))}
+        </div>
+      )
+    }
 
     <div class="mt-12" data-reveal>
       <a class="btn btn-lg bg-paper text-ink" href={MAILTO.speaking} data-magnetic>Invite me to speak</a>

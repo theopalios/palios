@@ -29,10 +29,10 @@ export const services: Service[] = [
     audience:
       'Keynotes, panels and workshops that make AI in healthcare concrete — for conferences, boards and teams.',
     points: [
-      'AI in healthcare, beyond the hype',
-      'Voice as a digital biomarker',
-      'Founder lessons from the clinic',
-      'Tailored formats: 20-min keynote to half-day workshop',
+      'How to build AI for highly regulated fields',
+      'AI: where it works, where it does not',
+      'Startups and building from zero',
+      'Innovation that survives the pilot',
     ],
     cta: { label: 'Send a speaking inquiry', href: '#book' },
     kind: 'speaking',
